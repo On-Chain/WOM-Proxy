@@ -15,6 +15,18 @@ Code base has been tested 100% to ensure no unforeseen bugs, and will help the i
 ## Diff
 [Visit here](https://www.diffchecker.com/0Ce4XKPg) to see the diff in contracts.  You'll notice that the only change is the `name, symbol, decimals, and initialSupply` moving from `constant` to public, and from `constructor()` to `initialize()`.  Additionally, the order of the contracts within one flattened contract is different but that doesn't imply a change in the codebase. 
 
+
+## Running
+Install packages
+`npm i`
+
+Spin up ganache-cli
+`npx ganache-cli`
+
+New terminal window run truffle test
+`npx truffle test`
+
+
 ## Security
 
 Please report any security issues you find to info@womprotocol.io, and good luck ¯\_(ツ)_/¯.
