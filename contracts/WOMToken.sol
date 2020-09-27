@@ -39,6 +39,17 @@ contract WOMToken is StandardToken, Ownable, Initializable {
         }
     }
 
+    function batchTransfer(address[] memory _to, uint256[] memory _value) 
+        public
+    {
+        require(_to.length <= 256, 'WOMToken: batch is greater than limit');
+        require(_to.length == _value.length, 'WOMToken: batch length not equal');
+        for (uint256 i = 0; i < _to.length; i++) {
+            transfer(_to[i], _value[i]);
+        }
+    }
+
+
     // the below function allows admin to transfer out any 
     // mistakenly sent ERC20 Tokens to `address(this)` 
     // (the address of this smart contract)

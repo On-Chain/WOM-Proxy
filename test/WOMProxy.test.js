@@ -1,6 +1,6 @@
 const { WOMToken, WOMTokenProxy, WOMProxyAdmin, UpgradeExample, encodeCall, assertRevert, expectRevert, ZERO_ADDRESS } = require('./common')
 
-contract('WOMTokenProxy', ([owner, newOwner, user, attacker]) => {
+contract('WOMTokenProxy', ([owner, newOwner, user, user_batch_1, user_batch_2, attacker]) => {
 	beforeEach(async () => {
         this.tokenImplementation = await WOMToken.new({ from: owner })
         this.newTokenImplementation = await UpgradeExample.new({ from: owner })
@@ -143,6 +143,17 @@ contract('WOMTokenProxy', ([owner, newOwner, user, attacker]) => {
                                     });
                                     it('balance updated', async () => {
                                         assert.equal(await this.token.balanceOf(user), 100)
+                                    });
+                                    describe('batch transfer', () => {
+                                        beforeEach(async () => {
+                                            await this.token.batchTransfer([user_batch_1, user_batch_2], [100, 100], { from: owner })
+                                        });
+                                        it('user 1 balance updated', async () => {
+                                            assert.equal(await this.token.balanceOf(user_batch_1), 100)
+                                        });
+                                        it('user 2 balance updated', async () => {
+                                            assert.equal(await this.token.balanceOf(user_batch_2), 100)
+                                        });
                                     });
                                 })
                             });
