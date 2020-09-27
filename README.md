@@ -26,6 +26,21 @@ Spin up ganache-cli
 New terminal window run truffle test
 `npx truffle test`
 
+## Deployments 
+
+### Ropsten 
+[WOMToken.sol](contracts/WOMToken.sol) - [https://ropsten.etherscan.io/address/0xbF501decd40D2b65d8A8a8215D54416666692E25#code](https://ropsten.etherscan.io/address/0xbF501decd40D2b65d8A8a8215D54416666692E25#code)
+[WOMProxyAdmin.sol](contracts/WOMProxyAdmin.sol) - [https://ropsten.etherscan.io/address/0xdbd5f71C4d48dcA17FAACD88C8664dD0fdE3f0a4#code](https://ropsten.etherscan.io/address/0xdbd5f71C4d48dcA17FAACD88C8664dD0fdE3f0a4#code)
+[WOMTokenProxy.sol](contracts/WOMTokenProxy.sol) - [https://ropsten.etherscan.io/address/0x235b8bcbe5c5fd14e1194471e1d802ec91c5e5cf](https://ropsten.etherscan.io/address/0x235b8bcbe5c5fd14e1194471e1d802ec91c5e5cf)
+
+`Owner`: 0xc9ECcDfAE49cAF308A1ABD97F5f56875874e4449
+`InitializeData`: 0x8129fc1c
+`ProxyAdmin`: 0xdbd5f71C4d48dcA17FAACD88C8664dD0fdE3f0a4
+
+1. WomToken.initialize() 
+2. WomToken.at(proxy).initialize()
+3. WomToken.at(proxy).batchTransfer(addresses[], values[])
+
 
 ## Security
 

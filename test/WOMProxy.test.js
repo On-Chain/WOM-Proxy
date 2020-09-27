@@ -6,6 +6,7 @@ contract('WOMTokenProxy', ([owner, newOwner, user, user_batch_1, user_batch_2, a
         this.newTokenImplementation = await UpgradeExample.new({ from: owner })
 
         this.data = encodeCall('initialize', [], [])
+        console.log(this.data)
     })
     describe('deploy proxy admin controller', () => {
         beforeEach(async () => {
