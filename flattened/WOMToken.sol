@@ -14,16 +14,6 @@ contract Ownable {
 
   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
-
-  /**
-   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-   * account.
-   */
-  constructor () public {
-    owner = msg.sender;
-  }
-
-
   /**
    * @dev Throws if called by any account other than the owner.
    */
@@ -349,6 +339,7 @@ contract WOMToken is StandardToken, Ownable, Initializable {
 
     // initialize instead of contructor, to ensure data inside of proxy.
     function initialize() public initializer {
+        owner = msg.sender;
         name = "WOM Token";
         symbol = "WOM";
         decimals = 18;
@@ -369,6 +360,17 @@ contract WOMToken is StandardToken, Ownable, Initializable {
             return true;
         }
     }
+
+    function batchTransfer(address[] memory _to, uint256[] memory _value) 
+        public
+    {
+        require(_to.length <= 256, 'WOMToken: batch is greater than limit');
+        require(_to.length == _value.length, 'WOMToken: batch length not equal');
+        for (uint256 i = 0; i < _to.length; i++) {
+            transfer(_to[i], _value[i]);
+        }
+    }
+
 
     // the below function allows admin to transfer out any 
     // mistakenly sent ERC20 Tokens to `address(this)` 
