@@ -49,19 +49,24 @@ contract('WOMTokenProxy', ([owner, newOwner, user, user_batch_1, user_batch_2, a
                         it('owner balance', async () => {
                             // console.log(await this.token.balanceOf(owner))
                         });
-                        it('owner initialized', async () => {
-                            assert.equal(await this.token.owner(), owner)
-                        });
-                        describe('transfer ownership of ownable', () => {
+                        describe('initialize owner', () => {
                             beforeEach(async () => {
-                                await this.token.transferOwnership(newOwner, { from: owner })
+                                await this.token.initializeOwner({ from: owner })
                             });
-                            describe('claim ownership', () => {
+                            it('owner set', async () => {
+                                assert.equal(await this.token.owner(), owner)
+                            });
+                            describe('transfer ownership of ownable', () => {
                                 beforeEach(async () => {
-                                    await this.token.claimOwnership({ from: newOwner })
+                                    await this.token.transferOwnership(newOwner, { from: owner })
                                 });
-                                it('new owner set', async () => {
-                                    assert.equal(await this.token.owner(), newOwner)
+                                describe('claim ownership', () => {
+                                    beforeEach(async () => {
+                                        await this.token.claimOwnership({ from: newOwner })
+                                    });
+                                    it('new owner set', async () => {
+                                        assert.equal(await this.token.owner(), newOwner)
+                                    });
                                 });
                             });
                         });

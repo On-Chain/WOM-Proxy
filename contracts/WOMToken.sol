@@ -18,7 +18,6 @@ contract WOMToken is StandardToken, Ownable, Initializable {
 
     // initialize instead of contructor, to ensure data inside of proxy.
     function initialize() public initializer {
-        owner = msg.sender;
         name = "WOM Token";
         symbol = "WOM";
         decimals = 18;

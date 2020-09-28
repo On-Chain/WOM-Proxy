@@ -11,8 +11,17 @@ pragma solidity 0.5.12;
 contract Ownable {
   address public owner;
   address public pendingOwner;
+  bool public ownerInitialized;
 
   event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+  function initializeOwner()
+    public
+  {
+    require(!ownerInitialized, 'Ownable: owner has already been initialized');
+    owner = msg.sender;
+    ownerInitialized = true;
+  }
 
   /**
    * @dev Throws if called by any account other than the owner.
@@ -339,7 +348,6 @@ contract WOMToken is StandardToken, Ownable, Initializable {
 
     // initialize instead of contructor, to ensure data inside of proxy.
     function initialize() public initializer {
-        owner = msg.sender;
         name = "WOM Token";
         symbol = "WOM";
         decimals = 18;
